@@ -41,6 +41,8 @@ public class AuthController {
             return "auth/signup";
         }
 
+        userService.register(signUpRequest);
+
         return "redirect:/auth/login";
     }
 
