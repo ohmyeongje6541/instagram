@@ -1,5 +1,7 @@
 package org.example.instagram.service;
 
-public class UserServiceImpl implements UserService{
+import org.springframework.stereotype.Service;
 
+@Service
+public class UserServiceImpl implements UserService{
 }
