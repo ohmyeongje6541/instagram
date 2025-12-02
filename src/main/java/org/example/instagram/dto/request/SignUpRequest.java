@@ -1,4 +1,4 @@
-package org.example.instagram.dto;
+package org.example.instagram.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

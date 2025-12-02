@@ -2,7 +2,7 @@ package org.example.instagram.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.instagram.dto.SignUpRequest;
+import org.example.instagram.dto.request.SignUpRequest;
 import org.example.instagram.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

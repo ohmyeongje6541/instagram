@@ -1,7 +1,7 @@
 package org.example.instagram.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.instagram.dto.SignUpRequest;
+import org.example.instagram.dto.request.SignUpRequest;
 import org.example.instagram.entity.Role;
 import org.example.instagram.entity.User;
 import org.example.instagram.repository.UserRepository;
