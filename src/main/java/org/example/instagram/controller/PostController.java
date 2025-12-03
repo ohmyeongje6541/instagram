@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PostController {
     private final PostService postService;
     private final CommentService commentService;
+    private final LikeService likeService;
 
 
     @GetMapping("/new")
@@ -87,6 +88,15 @@ public class PostController {
 
 
         return "redirect:/posts/" + postId;
+    }
+
+    @PostMapping("{id}/like")
+    public String toggleLike(
+        @PathVariable Long id,
+        @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        likeService.toggleLike(id, userDetails.getId());
+        return "redirect:/posts/" + id;
     }
 
 }
