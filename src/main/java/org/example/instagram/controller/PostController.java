@@ -3,6 +3,7 @@ package org.example.instagram.controller;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.example.instagram.dto.reponse.CommentResponse;
 import org.example.instagram.dto.reponse.PostResponse;
 import org.example.instagram.dto.request.CommentCreateRequest;
 import org.example.instagram.dto.request.PostCreateRequest;
@@ -53,8 +54,12 @@ public class PostController {
         Model model
     ) {
         PostResponse post = postService.getPost(id);
+
+        List<CommentResponse> comments = commentService.getComments(id);
+
         model.addAttribute("post", post);
         model.addAttribute("commentRequest", new CommentCreateRequest());
+        model.addAttribute("comments", comments);
         return "post/detail";
     }
 
