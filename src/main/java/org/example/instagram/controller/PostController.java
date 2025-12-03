@@ -9,6 +9,7 @@ import org.example.instagram.dto.request.CommentRequest;
 import org.example.instagram.dto.request.PostCreateRequest;
 import org.example.instagram.security.CustomUserDetails;
 import org.example.instagram.service.CommentService;
+import org.example.instagram.service.LikeService;
 import org.example.instagram.service.PostService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
