@@ -11,27 +11,33 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
+@Table(name = "comments")
 @Getter
-@Table(name = "posts")
 @NoArgsConstructor
-public class Post extends BaseEntity{
+public class Comment extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false, length = 500)
     private String content;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
+
     @Builder
-    public Post(String content, User user) {
+    public Comment(String content, User user, Post post) {
         this.content = content;
         this.user = user;
+        this.post = post;
     }
+
 }
