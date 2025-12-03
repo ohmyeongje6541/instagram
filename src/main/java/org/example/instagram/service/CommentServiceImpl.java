@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.example.instagram.dto.reponse.CommentResponse;
-import org.example.instagram.dto.request.CommentCreateRequest;
+import org.example.instagram.dto.request.CommentRequest;
 import org.example.instagram.entity.Comment;
 import org.example.instagram.entity.Post;
 import org.example.instagram.entity.User;
@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public CommentResponse create(
         Long postId,
-        CommentCreateRequest commentCreateRequest,
+        CommentRequest commentCreateRequest,
         Long userId) {
         Post post = postService.findById(postId);
         User user = userService.findById(userId);

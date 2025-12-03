@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.instagram.dto.reponse.CommentResponse;
 import org.example.instagram.dto.reponse.PostResponse;
-import org.example.instagram.dto.request.CommentCreateRequest;
+import org.example.instagram.dto.request.CommentRequest;
 import org.example.instagram.dto.request.PostCreateRequest;
 import org.example.instagram.security.CustomUserDetails;
 import org.example.instagram.service.CommentService;
@@ -22,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/posts")
-@RequiredArgsConstructor // final 로 선언된 필드의 생성자를 자동으로 생성
+@RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
     private final CommentService commentService;
+
 
     @GetMapping("/new")
     public String createForm(Model model) {
@@ -58,25 +59,34 @@ public class PostController {
         List<CommentResponse> comments = commentService.getComments(id);
 
         model.addAttribute("post", post);
-        model.addAttribute("commentRequest", new CommentCreateRequest());
+        model.addAttribute("commentRequest", new CommentRequest());
         model.addAttribute("comments", comments);
         return "post/detail";
     }
 
+
     @PostMapping("/{postId}/comments")
     public String createComment(
         @PathVariable Long postId,
-        @Valid @ModelAttribute CommentCreateRequest commentCreateRequest,
+        @Valid @ModelAttribute CommentRequest commentRequest,
         BindingResult bindingResult,
-        @AuthenticationPrincipal CustomUserDetails userDetails
+        @AuthenticationPrincipal CustomUserDetails userDetails,
+        Model model
     ) {
         if (bindingResult.hasErrors()) {
+            PostResponse post = postService.getPost(postId);
+            List<CommentResponse> comments = commentService.getComments(postId);
+
+            model.addAttribute("post", post);
+            model.addAttribute("comments", comments);
+//            model.addAttribute("commentRequest", commentCreateRequest);
             return "post/detail";
         }
 
-        commentService.create(postId, commentCreateRequest, userDetails.getId());
+        commentService.create(postId, commentRequest, userDetails.getId());
 
 
         return "redirect:/posts/" + postId;
     }
+
 }
