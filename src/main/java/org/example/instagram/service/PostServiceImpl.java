@@ -1,15 +1,19 @@
 package org.example.instagram.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import org.example.instagram.dto.reponse.PostResponse;
+import org.example.instagram.dto.response.PostResponse;
 import org.example.instagram.dto.request.PostCreateRequest;
 import org.example.instagram.entity.Post;
 import org.example.instagram.entity.User;
 import org.example.instagram.repository.PostRepository;
+import org.example.instagram.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.example.instagram.entity.User;
+import org.example.instagram.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +53,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostResponse> getAllPosts() {
         return postRepository.findAllByOrderByCreatedAtDesc().stream()
+            .map(PostResponse::from)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PostResponse> getPostsByUsername(String username) {
+        User user = userService.findByUsername(username);
+
+        return postRepository.findByUserIdOrderByCreatedAtDesc(user.getId()).stream()
             .map(PostResponse::from)
             .collect(Collectors.toList());
     }
