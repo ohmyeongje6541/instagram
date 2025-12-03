@@ -1,4 +1,4 @@
-package org.example.instagram.dto.reponse;
+package org.example.instagram.dto.response;
 
 import java.time.LocalDateTime;
 

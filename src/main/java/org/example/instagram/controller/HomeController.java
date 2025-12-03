@@ -3,7 +3,7 @@ package org.example.instagram.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.example.instagram.dto.reponse.PostResponse;
+import org.example.instagram.dto.response.PostResponse;
 import org.example.instagram.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

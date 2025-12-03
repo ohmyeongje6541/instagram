@@ -1,7 +1,7 @@
 package org.example.instagram.service;
 
 import java.util.List;
-import org.example.instagram.dto.reponse.CommentResponse;
+import org.example.instagram.dto.response.CommentResponse;
 import org.example.instagram.dto.request.CommentRequest;
 
 public interface CommentService {
