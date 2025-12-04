@@ -41,14 +41,14 @@ public class LikeServiceImpl implements LikeService {
 
     }
 
-//    @Override
-//    public boolean isLiked() {
-//
-//    }
-//
-//    @Override
-//    public long getLikeCount() {
-//
-//    }
+    @Override
+    public boolean isLiked(Long postId, Long userId) {
+        return likeRepository.existsByPostIdAndUserId(postId, userId);
+    }
+
+    @Override
+    public long getLikeCount(Long postId) {
+        return likeRepository.countByPostId(postId);
+    }
 
 }
