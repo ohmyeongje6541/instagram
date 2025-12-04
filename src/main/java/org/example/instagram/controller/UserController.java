@@ -43,6 +43,9 @@ public class UserController {
         );
         model.addAttribute("isFollowing", isFollowing);
 
+        boolean isOwner = userDetails.getUsername().equals(username);
+        model.addAttribute("isOwner", isOwner);
+
         return "user/profile";
     }
 
