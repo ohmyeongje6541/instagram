@@ -4,9 +4,10 @@ import java.util.List;
 import org.example.instagram.dto.response.PostResponse;
 import org.example.instagram.dto.request.PostCreateRequest;
 import org.example.instagram.entity.Post;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface PostService {
-    PostResponse create(PostCreateRequest postCreateRequest, Long userId);
+    PostResponse create(PostCreateRequest postCreateRequest, MultipartFile image, Long userId);
     Post findById(Long postId);
     PostResponse getPost(Long postId);
     List<PostResponse> getAllPosts();

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/posts")
@@ -40,13 +42,14 @@ public class PostController {
     public String create(
         @Valid @ModelAttribute PostCreateRequest postCreateRequest,
         BindingResult bindingResult,
-        @AuthenticationPrincipal CustomUserDetails userDetails
+        @AuthenticationPrincipal CustomUserDetails userDetails,
+        @RequestParam(value = "image", required = false) MultipartFile image
     ) {
         if (bindingResult.hasErrors()) {
             return "post/form";
         }
 
-        postService.create(postCreateRequest, userDetails.getId());
+        postService.create(postCreateRequest, image, userDetails.getId());
 
         return "redirect:/";
     }
@@ -54,7 +57,8 @@ public class PostController {
     @GetMapping("/{id}")
     public String detail(
         @PathVariable Long id,
-        Model model
+        Model model,
+        @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         PostResponse post = postService.getPost(id);
 
@@ -63,6 +67,8 @@ public class PostController {
         model.addAttribute("post", post);
         model.addAttribute("commentRequest", new CommentRequest());
         model.addAttribute("comments", comments);
+        model.addAttribute("liked", likeService.isLiked(id, userDetails.getId()));
+        model.addAttribute("likeCount", likeService.getLikeCount(id));
         return "post/detail";
     }
 
