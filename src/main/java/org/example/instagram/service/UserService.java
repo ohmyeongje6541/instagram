@@ -1,5 +1,6 @@
 package org.example.instagram.service;
 
+import org.example.instagram.dto.request.ProfileUpdateRequest;
 import org.example.instagram.dto.response.ProfileResponse;
 import org.example.instagram.dto.request.SignUpRequest;
 import org.example.instagram.dto.response.UserResponse;
@@ -18,4 +19,6 @@ public interface UserService {
     User findByUsername(String username);
 
     UserResponse getUserById(Long userId);
+
+    void updateProfile(Long userId, ProfileUpdateRequest profileUpdateRequest);
 }

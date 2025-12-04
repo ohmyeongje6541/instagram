@@ -21,7 +21,7 @@ public class UserResponse {
             .email(user.getEmail())
             .bio(user.getBio())
             .username(user.getUsername())
-            .profileImageUrl(user.getProfileImageUrl)
+            .profileImageUrl(user.getProfileImageUrl())
             .build();
     }
 }

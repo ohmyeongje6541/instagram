@@ -43,7 +43,7 @@ public class User extends BaseEntity{
     private String profileImageUrl;
 
     @Builder
-    public User(String username, String password, String email, Role role, String bio, String name) {
+    public User(String username, String password, String email, String name, Role role, String bio) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -56,4 +56,7 @@ public class User extends BaseEntity{
         this.name = name;
         this.bio = bio;
     }
+
+
+
 }
