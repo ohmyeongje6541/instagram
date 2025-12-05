@@ -1,5 +1,6 @@
 package org.example.instagram.service;
 
+import java.util.List;
 import org.example.instagram.dto.request.ProfileUpdateRequest;
 import org.example.instagram.dto.response.ProfileResponse;
 import org.example.instagram.dto.request.SignUpRequest;
@@ -22,4 +23,7 @@ public interface UserService {
     UserResponse getUserById(Long userId);
 
     void updateProfile(Long userId, ProfileUpdateRequest profileUpdateRequest, MultipartFile profileImg);
+
+    // 사용자 검색
+    List<UserResponse> searchUsers(String keyword);
 }

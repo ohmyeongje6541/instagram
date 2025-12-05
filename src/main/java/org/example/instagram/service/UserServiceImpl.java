@@ -1,5 +1,6 @@
 package org.example.instagram.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.instagram.dto.request.ProfileUpdateRequest;
 import org.example.instagram.dto.response.ProfileResponse;
@@ -89,5 +90,12 @@ public class UserServiceImpl implements UserService{
         }
 
         user.updateProfile(profileUpdateRequest.getName(), profileUpdateRequest.getBio());
+    }
+
+    @Override
+    public List<UserResponse> searchUsers(String keyword) {
+        return userRepository.searchByKeyword(keyword).stream()
+            .map(UserResponse::from)
+            .toList();
     }
 }
