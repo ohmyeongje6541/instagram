@@ -4,6 +4,8 @@ import java.util.List;
 import org.example.instagram.dto.response.PostResponse;
 import org.example.instagram.dto.request.PostCreateRequest;
 import org.example.instagram.entity.Post;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface PostService {
@@ -14,4 +16,10 @@ public interface PostService {
     List<PostResponse> getPostsByUsername(String username);
     long countByUserId(Long userId);
     List<PostResponse> getAllPostsWithStats();
+
+    // 피드 조회
+    Slice<PostResponse> getFeedPosts(Long userId, Pageable pageable);
+
+    // 전체게시물 조회
+    Slice<PostResponse> getAllPostsPaging(Pageable pageable);
 }

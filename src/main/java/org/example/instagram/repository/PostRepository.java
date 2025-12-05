@@ -3,8 +3,12 @@ package org.example.instagram.repository;
 import java.util.List;
 import java.util.Optional;
 import org.example.instagram.entity.Post;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     @EntityGraph(attributePaths = {"user"})
@@ -17,5 +21,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @EntityGraph(attributePaths = "user")
     Optional<Post> findById(Long id);
+
+    // 피드조회
+    @Query("SELECT p FROM Post p JOIN FETCH p.user WHERE p.user.id IN :userIds ORDER BY p.createdAt DESC")
+    Slice<Post> findFeedPostsByUserIds(@Param("userIds") List<Long> userIds, Pageable pageable);
+
+
+    // 전체게시물조회 (페이징)
+    @Query("SELECT p FROM Post p JOIN FETCH p.user ORDER BY p.createdAt DESC")
+    Slice<Post> findAllWithUserPaging(Pageable pageable);
 }
 
