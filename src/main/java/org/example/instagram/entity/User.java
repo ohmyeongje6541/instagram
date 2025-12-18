@@ -57,6 +57,10 @@ public class User extends BaseEntity{
         this.bio = bio;
     }
 
+    public void updateProfileImage(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
 
 
 }

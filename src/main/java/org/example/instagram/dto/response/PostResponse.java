@@ -12,9 +12,11 @@ public class PostResponse {
     private Long id;
     private String content;
     private LocalDateTime createdAt;
+    private String imageUrl;
 
     private Long userId;
     private String username;
+    private String profileImageUrl;
 
     private long commentCount;
     private long likeCount;
@@ -25,8 +27,10 @@ public class PostResponse {
             .id(post.getId())
             .content(post.getContent())
             .createdAt(post.getCreatedAt())
+            .imageUrl(post.getImageUrl())
             .userId(post.getUser().getId())
             .username(post.getUser().getUsername())
+            .profileImageUrl(post.getUser().getProfileImageUrl())
             .likeCount(0)
             .commentCount(0)
             .build();
@@ -38,8 +42,10 @@ public class PostResponse {
             .id(post.getId())
             .content(post.getContent())
             .createdAt(post.getCreatedAt())
+            .imageUrl(post.getImageUrl())
             .userId(post.getUser().getId())
             .username(post.getUser().getUsername())
+            .profileImageUrl(post.getUser().getProfileImageUrl())
             .likeCount(likeCount)
             .commentCount(commentCount)
             .build();

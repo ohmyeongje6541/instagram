@@ -15,11 +15,21 @@ public class HomeController {
 
     private final PostService postService;
 
+//    @GetMapping("/")
+//    public String home(Model model) {
+    ////        List<PostResponse> posts = postService.getAllPosts();
+//        List<PostResponse> posts = postService.getAllPostsWithStats();
+//        model.addAttribute("posts", posts);
+//        return "home";
+//    }
     @GetMapping("/")
-    public String home(Model model) {
-       // List<PostResponse> posts = postService.getAllPosts();
-        List<PostResponse> posts = postService.getAllPostsWithStats();
-        model.addAttribute("posts", posts);
+    public String home() {
         return "home";
+    }
+
+
+    @GetMapping("/explore")
+    public String explore() {
+        return "explore";
     }
 }

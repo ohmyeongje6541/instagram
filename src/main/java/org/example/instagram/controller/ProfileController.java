@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/profile")
@@ -43,7 +45,8 @@ public class ProfileController {
         @Valid @ModelAttribute ProfileUpdateRequest profileUpdateRequest,
         BindingResult bindingResult,
         @AuthenticationPrincipal CustomUserDetails userDetails,
-        Model model
+        Model model,
+        @RequestParam(value = "profileImg", required = false) MultipartFile profileImg
     ) {
         if (bindingResult.hasErrors()) {
             UserResponse currentUser = userService.getUserById(userDetails.getId());
@@ -51,7 +54,7 @@ public class ProfileController {
             return "profile/edit";
         }
 
-        userService.updateProfile(userDetails.getId(), profileUpdateRequest);
+        userService.updateProfile(userDetails.getId(), profileUpdateRequest, profileImg);
         return "redirect:/users/" + userDetails.getUsername();
 
     }
